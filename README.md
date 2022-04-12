@@ -1,1 +1,5 @@
-#Samurai way 
+#SAMURAI WAY
+
+- tsx
+- components
+- import | export
