@@ -1,6 +1,6 @@
 import React from "react";
 
-function Technologies() {
+export function Technologies() {
     return (
         <ul>
             <li>css</li>
@@ -12,4 +12,4 @@ function Technologies() {
 }
 
 
-export default Technologies;
+
