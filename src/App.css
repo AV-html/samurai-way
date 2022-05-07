@@ -1,3 +1,64 @@
-ul li{
-  list-style: square;
+ul {
+    list-style: none;
+}
+
+
+.app-wrapper {
+    min-height: 100%;
+    overflow: hidden;
+
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 30px;
+    box-sizing: content-box;
+
+    display: grid;
+    grid-template-areas: "head head"
+                         "nav main";
+    grid-template-rows: 85px 1fr;
+    grid-template-columns: minmax(200px, 300px) 1fr;
+    grid-gap: 30px;
+}
+
+.header {
+    grid-area: head;
+    background-color: #f9e998;
+}
+
+.logo {
+    display: inline-block;
+    width: 80px;
+    height: 70px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nav {
+    grid-area: nav;
+    background-color: #f9e998;
+}
+
+ul li a {
+    color: #FE5256;
+}
+
+.main {
+    grid-area: main;
+    background-color: #ffffcc;
+}
+
+.main-header {
+    height: 250px;
+    margin-bottom: 30px;
+}
+
+.main-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 75%;
 }
