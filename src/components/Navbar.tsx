@@ -1,25 +1,27 @@
 import React from 'react';
+import n from './Navbar.module.css';
 
 export function Navbar() {
     return (
-        <nav className={'nav'}>
-            <ul>
-                <li>
-                    <a href="#r">Profile</a>
+        <nav className={n.nav}>
+            <ul className={n.list}>
+                <li className={n.item}>
+                    <a href="#r" className={n.active}>Profile</a>
                 </li>
-                <li>
+                <li className={n.item}>
                     <a href="#r">Messages</a>
                 </li>
-                <li>
+                <li className={n.item}>
                     <a href="#r">News</a>
                 </li>
-                <li>
+                <li className={n.item}>
                     <a href="#r">Music</a>
                 </li>
-                <li>
+                <li className={n.item}>
                     <a href="#r">Settings</a>
                 </li>
             </ul>
         </nav>
-    );
+    )
+        ;
 }

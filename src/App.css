@@ -1,7 +1,3 @@
-ul {
-    list-style: none;
-}
-
 .app-wrapper {
     min-height: 100%;
     overflow: hidden;
@@ -19,45 +15,10 @@ ul {
     grid-gap: 30px;
 }
 
-.header {
-    grid-area: head;
-    background-color: #f9e998;
-}
-
-.logo {
-    display: inline-block;
-    width: 80px;
-    height: 70px;
-}
-
-.logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.nav {
-    grid-area: nav;
-    background-color: #f9e998;
-}
-
-ul li a {
-    color: #FE5256;
-}
-
-.profile {
+.main {
     grid-area: main;
     background-color: #ffffcc;
 }
 
-.profile-header {
-    height: 250px;
-    margin-bottom: 30px;
-}
 
-.profile-header img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 0 75%;
-}
+

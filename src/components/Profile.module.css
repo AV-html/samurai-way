@@ -1,0 +1,152 @@
+.profile {
+    padding: 30px;
+}
+
+/* profile-header */
+.profile-header {
+    height: 250px;
+    margin-bottom: 70px;
+
+}
+
+.profile-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 75%;
+}
+
+
+/* profile-info */
+.profile-info {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto 50px;
+}
+
+.profile-avatar {
+    flex: 0 0 200px;
+}
+
+.profile-avatar img {
+    max-width: 100%;
+}
+
+.profile-desc {
+    align-self: center;
+    flex: 1 1 auto;
+
+    padding-left: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 180%;
+}
+
+.desc-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.desc-date {
+
+}
+
+.desc-city {
+
+}
+
+.desc-educ {
+
+}
+
+.desc-site a {
+    text-decoration: none;
+    color: #FE5256;
+    transition: all 0.3s ease 0s;
+}
+
+.desc-site a:hover {
+    color: #A4080C;
+}
+
+/* new-post */
+.new-post {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.new-post-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.new-post-text {
+    display: inline-flex;
+}
+
+.new-post-text textarea {
+    padding: 10px;
+    resize: none;
+    font-size: 16px;
+}
+
+.new-post-text textarea:focus {
+    outline: none;
+}
+
+.wrap-btn {
+    align-self: flex-end;
+}
+
+.wrap-btn button {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px;
+    background-color: #f9e998;
+    transition: all 0.3s ease 0s;
+}
+
+.wrap-btn button:hover {
+    background-color: #A4080C;
+    color: #fff;
+}
+
+
+/* post-list */
+
+.post-list {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.post-item {
+    display: flex;
+    margin-bottom: 20px;
+
+}
+
+.post-item:last-child {
+    margin-bottom: 0;
+}
+
+.post-avatar {
+    margin-right: 30px;
+
+}
+
+.post-avatar img {
+    width: 70px;
+    height: 70px;
+}
+
+.post-message {
+    align-self: center;
+    background-color: #f9e998;
+    padding: 10px;
+}
+
+
+
+

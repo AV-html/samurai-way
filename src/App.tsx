@@ -11,7 +11,9 @@ function App() {
 
             <Header/>
             <Navbar/>
-            <Profile/>
+            <main className={'main'}>
+                <Profile/>
+            </main>
 
         </div>
     );
