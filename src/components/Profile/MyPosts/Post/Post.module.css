@@ -1,0 +1,34 @@
+.item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.item:last-child {
+    margin-bottom: 0;
+}
+
+.avatar {
+    margin-right: 30px;
+
+}
+
+.avatar img {
+    width: 70px;
+    height: 70px;
+}
+
+.message {
+    align-self: center;
+    background-color: #f9e998;
+    padding: 10px;
+}
+
+.like {
+    flex: 1 0 100px;
+    align-self: flex-end;
+    white-space: nowrap;
+}
+
+
+
+
