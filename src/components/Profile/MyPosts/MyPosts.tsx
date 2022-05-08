@@ -16,11 +16,19 @@ export function MyPosts() {
 
             </div>
             <ul className={p['post-list']}>
-                <Post/>
+                <Post
+                    message={'Doloremque dolorum, exercitationem libero nam odit porro quaerat, sequi similique tempore? Cumque, illum, optio.'}
+                    likesCount={15}
+                />
 
-                <Post/>
+                <Post message={'Consectetur adipisicing elit. Alias distinctio eius est laborum magni rerum!'}
+                      likesCount={20}
+                />
 
-                <Post/>
+                <Post
+                    message={'Adipisci aut culpa doloremque dolorum, exercitationem libero nam odit porro quaerat sequ'}
+                    likesCount={1}
+                />
             </ul>
         </>
     );

@@ -27,6 +27,13 @@
     flex: 1 0 100px;
     align-self: flex-end;
     white-space: nowrap;
+    padding: 5px;
+}
+
+.like img {
+    width: 28px;
+    height: 28px;
+    margin-right: 5px;
 }
 
 
