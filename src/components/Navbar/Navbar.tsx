@@ -6,19 +6,19 @@ export function Navbar() {
         <nav className={n.nav}>
             <ul className={n.list}>
                 <li className={n.item}>
-                    <a href="src/components/Navbar/Navbar#r" className={n.active}>Profile</a>
+                    <a href="/profile" className={n.active}>Profile</a>
                 </li>
                 <li className={n.item}>
-                    <a href="src/components/Navbar/Navbar#r">Messages</a>
+                    <a href="/messages">Messages</a>
                 </li>
                 <li className={n.item}>
-                    <a href="src/components/Navbar/Navbar#r">News</a>
+                    <a href="/news">News</a>
                 </li>
                 <li className={n.item}>
-                    <a href="src/components/Navbar/Navbar#r">Music</a>
+                    <a href="/music">Music</a>
                 </li>
                 <li className={n.item}>
-                    <a href="src/components/Navbar/Navbar#r">Settings</a>
+                    <a href="/settings">Settings</a>
                 </li>
             </ul>
         </nav>
