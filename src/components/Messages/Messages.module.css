@@ -1,0 +1,53 @@
+.messages {
+    padding: 50px;
+}
+
+.title {
+    text-align: center;
+    font-size: 28px;
+    line-height: 130%;
+    margin-bottom: 30px;
+}
+
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-gap: 4%;
+}
+
+.list {
+
+}
+
+.item {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.item img {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.item.active {
+    color: #A4080C;
+    font-weight: 700;
+}
+
+.message-list {
+    padding: 10px;
+}
+
+.message {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 3px solid #f9e998;
+}
+
+.message:last-child {
+    margin-bottom: 0;
+}
