@@ -1,24 +1,25 @@
 import React from 'react';
 import n from './Navbar.module.css';
+import {NavLink} from 'react-router-dom';
 
 export function Navbar() {
     return (
         <nav className={n.nav}>
             <ul className={n.list}>
                 <li className={n.item}>
-                    <a href="/profile" className={n.active}>Profile</a>
+                    <NavLink to="/profile" activeClassName={n.active}>Profile</NavLink>
                 </li>
                 <li className={n.item}>
-                    <a href="/messages">Messages</a>
+                    <NavLink to="/messages" activeClassName={n.active}>Messages</NavLink>
                 </li>
                 <li className={n.item}>
-                    <a href="/news">News</a>
+                    <NavLink to="/news" activeClassName={n.active}>News</NavLink>
                 </li>
                 <li className={n.item}>
-                    <a href="/music">Music</a>
+                    <NavLink to="/music" activeClassName={n.active}>Music</NavLink>
                 </li>
                 <li className={n.item}>
-                    <a href="/settings">Settings</a>
+                    <NavLink to="/settings" activeClassName={n.active}>Settings</NavLink>
                 </li>
             </ul>
         </nav>
