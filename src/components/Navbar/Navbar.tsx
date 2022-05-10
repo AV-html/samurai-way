@@ -3,7 +3,7 @@ import n from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 
 
-type NavLinkClassNameType = {
+export type NavLinkClassNameType = {
     isActive: boolean
 }
 

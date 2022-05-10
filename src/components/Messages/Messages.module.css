@@ -31,9 +31,14 @@
     margin-right: 20px;
 }
 
-.item.active {
+.item a {
+    color: #FE5256;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.item a.active {
     color: #A4080C;
-    font-weight: 700;
 }
 
 .message-list {
