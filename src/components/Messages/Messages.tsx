@@ -35,8 +35,6 @@ export function Messages() {
                     <li className={d.message}>How are you?</li>
                 </ul>
             </div>
-
-
         </div>
     );
 }

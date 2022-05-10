@@ -9,7 +9,7 @@ import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 
 
 function App() {
@@ -19,11 +19,17 @@ function App() {
                 <Header/>
                 <Navbar/>
                 <main className={'main'}>
-                    <Route path={'/profile'} component={Profile}/>
-                    <Route path={'/messages'} component={Messages}/>
-                    <Route path={'/news'} component={News}/>
-                    <Route path={'/music'} component={Music}/>
-                    <Route path={'/settings'} component={Settings}/>
+                    <Routes>
+                        <Route
+                            path="*"
+                            element={<Navigate to="/profile"/>}
+                        />
+                        <Route path={'/profile'} element={<Profile/>}/>
+                        <Route path={'/messages'} element={<Messages/>}/>
+                        <Route path={'/news'} element={<News/>}/>
+                        <Route path={'/music'} element={<Music/>}/>
+                        <Route path={'/settings'} element={<Settings/>}/>
+                    </Routes>
                 </main>
             </div>
         </BrowserRouter>
