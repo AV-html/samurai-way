@@ -1,0 +1,22 @@
+
+.item {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.item img {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.item a {
+    color: #FE5256;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.item a.active {
+    color: #A4080C;
+}
