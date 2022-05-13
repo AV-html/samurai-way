@@ -10,13 +10,11 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
-import {DialogsDataType, MessagesDataType, PostsDataType} from './index';
+import {StateType} from './redux/state';
 
 
 type PropsType = {
-    postsData: PostsDataType
-    dialogsData: DialogsDataType
-    messagesData: MessagesDataType
+    appState: StateType
 }
 
 
@@ -35,14 +33,14 @@ function App(props: PropsType) {
                         <Route
                             path={'/profile/*'}
                             element={<Profile
-                                postsData={props.postsData}
+                                postsData={props.appState.postsData}
                             />}
                         />
                         <Route
                             path={'/messages/*'}
                             element={<Messages
-                                dialogsData={props.dialogsData}
-                                messagesData={props.messagesData}
+                                dialogsData={props.appState.dialogsData}
+                                messagesData={props.appState.messagesData}
                             />}
                         />
 
