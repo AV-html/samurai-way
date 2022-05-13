@@ -23,33 +23,9 @@ export function Post(props: PropsType) {
                 </div>
             </li>
 
+            {/*<img src="https://litolan.ua/templates/europlast/resource/img/ceo.svg"/>*/}
+            {/*<img src="https://www.montrealtherapy.com/wp-content/uploads/2016/07/avatars-4.png"/>*/}
 
-            {/*<li className={p.item}>*/}
-            {/*    <div className={p.avatar}>*/}
-            {/*        <img src="https://litolan.ua/templates/europlast/resource/img/ceo.svg"*/}
-            {/*             alt=""/>*/}
-            {/*    </div>*/}
-            {/*    <p className={p.message}>*/}
-            {/*        Consectetur adipisicing elit. Alias distinctio eius est*/}
-            {/*        laborum magni rerum!*/}
-            {/*    </p>*/}
-            {/*    <div className={p.like}>*/}
-            {/*        like*/}
-            {/*    </div>*/}
-            {/*</li>*/}
-            {/*<li className={p.item}>*/}
-            {/*    <div className={p.avatar}>*/}
-            {/*        <img src="https://www.montrealtherapy.com/wp-content/uploads/2016/07/avatars-4.png"*/}
-            {/*             alt=""/>*/}
-            {/*    </div>*/}
-            {/*    <p className={p.message}>*/}
-            {/*        Adipisci aut culpa doloremque*/}
-            {/*        dolorum, exercitationem libero nam odit porro quaerat, sequi*/}
-            {/*    </p>*/}
-            {/*    <div className={p.like}>*/}
-            {/*        like*/}
-            {/*    </div>*/}
-            {/*</li>*/}
         </>
     );
 }

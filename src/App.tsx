@@ -10,9 +10,17 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
+import {DialogsDataType, MessagesDataType, PostsDataType} from './index';
 
 
-function App() {
+type PropsType = {
+    postsData: PostsDataType
+    dialogsData: DialogsDataType
+    messagesData: MessagesDataType
+}
+
+
+function App(props: PropsType) {
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
@@ -24,8 +32,20 @@ function App() {
                             path="/"
                             element={<Navigate to="/profile"/>}
                         />
-                        <Route path={'/profile/*'} element={<Profile/>}/>
-                        <Route path={'/messages/*'} element={<Messages/>}/>
+                        <Route
+                            path={'/profile/*'}
+                            element={<Profile
+                                postsData={props.postsData}
+                            />}
+                        />
+                        <Route
+                            path={'/messages/*'}
+                            element={<Messages
+                                dialogsData={props.dialogsData}
+                                messagesData={props.messagesData}
+                            />}
+                        />
+
                         <Route path={'/news/*'} element={<News/>}/>
                         <Route path={'/music/*'} element={<Music/>}/>
                         <Route path={'/settings/*'} element={<Settings/>}/>

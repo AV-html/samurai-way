@@ -1,36 +1,15 @@
 import React from 'react';
 import p from './MyPosts.module.css';
 import {Post} from './Post/Post';
+import {PostsDataType} from '../../../index';
 
 
-type PostsDataType = Array<PostType>
-type PostType = {
-    id: string
-    message: string
-    likesCount: number
+type PropsType = {
+    postsData: PostsDataType
 }
 
-const postsData: PostsDataType = [
-    {
-        id: '1',
-        message: '\'Doloremque dolorum, exercitationem libero nam odit porro quaerat, sequi similique tempore? Cumque, illum, optio.\'!',
-        likesCount: 15
-    },
-    {
-        id: '2',
-        message: 'Consectetur adipisicing elit. Alias distinctio eius est laborum magni rerum!',
-        likesCount: 20
-    },
-    {
-        id: '3',
-        message: 'Adipisci aut culpa doloremque dolorum, exercitationem libero nam odit porro quaerat sequ',
-        likesCount: 1
-    }
-]
-
-
-export function MyPosts() {
-    const postsList = postsData.map(p => (
+export function MyPosts(props: PropsType) {
+    const postsList = props.postsData.map(p => (
         <Post
             message={p.message}
             likesCount={p.likesCount}
