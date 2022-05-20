@@ -1,4 +1,5 @@
 import {v1} from 'uuid';
+import {renderTree} from '../render';
 
 export type PostsDataType = Array<PostType>
 export type PostType = {
@@ -83,4 +84,5 @@ export const addPost = (textPost: string) => {
     }
 
     state.profilePage.postsData.push(newPost)
+    renderTree(state)
 }
