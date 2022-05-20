@@ -19,7 +19,49 @@
 
 }
 
+.message-block {
+    padding: 10px;
+}
 
 .message-list {
+    margin-bottom: 30px;
+}
+
+.new-message-text {
+    display: flex;
+}
+
+.new-message-text textarea {
     padding: 10px;
+    resize: none;
+    font-size: 16px;
+
+    border: #f9e998 solid 3px;
+
+    transition: all 0.5s ease 0s;
+    margin-right: 15px;
+}
+
+.new-message-text textarea:focus {
+    outline: none;
+    border-color: #A4080C;
+}
+
+
+/* style button */
+.wrap-btn {
+    align-self: flex-end;
+}
+
+.wrap-btn button {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px;
+    background-color: #f9e998;
+    transition: all 0.3s ease 0s;
+}
+
+.wrap-btn button:hover {
+    background-color: #A4080C;
+    color: #fff;
 }

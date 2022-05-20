@@ -6,6 +6,7 @@ import {ProfilePageType} from '../../../redux/state';
 
 type PropsType = {
     state: ProfilePageType
+    addPostCallback: (textPost: string) => void
 }
 
 export function MyPosts(props: PropsType) {
@@ -16,10 +17,11 @@ export function MyPosts(props: PropsType) {
         />
     ))
 
-    const newPostElement: React.LegacyRef<HTMLTextAreaElement> = React.createRef()
+    const newPostElement = React.createRef<HTMLTextAreaElement>()
     const addPostHandler = () => {
-        let text = newPostElement.current?.value;
-        alert(text)
+        if (newPostElement.current) {
+            props.addPostCallback(newPostElement.current.value);
+        }
     }
 
     return (

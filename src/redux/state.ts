@@ -1,3 +1,5 @@
+import {v1} from 'uuid';
+
 export type PostsDataType = Array<PostType>
 export type PostType = {
     id: string
@@ -37,17 +39,17 @@ export const state: StateType = {
     profilePage: {
         postsData: [
             {
-                id: '1',
+                id: v1(),
                 message: '\'Doloremque dolorum, exercitationem libero nam odit porro quaerat, sequi similique tempore? Cumque, illum, optio.\'!',
                 likesCount: 15
             },
             {
-                id: '2',
+                id: v1(),
                 message: 'Consectetur adipisicing elit. Alias distinctio eius est laborum magni rerum!',
                 likesCount: 20
             },
             {
-                id: '3',
+                id: v1(),
                 message: 'Adipisci aut culpa doloremque dolorum, exercitationem libero nam odit porro quaerat sequ',
                 likesCount: 2
             }
@@ -70,4 +72,15 @@ export const state: StateType = {
         ],
     },
     // sidebar: {}
+}
+
+export const addPost = (textPost: string) => {
+
+    const newPost: PostType = {
+        id: v1(),
+        message: textPost,
+        likesCount: 0
+    }
+
+    state.profilePage.postsData.push(newPost)
 }
