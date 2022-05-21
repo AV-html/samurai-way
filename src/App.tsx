@@ -15,7 +15,8 @@ import {StateType} from './redux/state';
 
 type PropsType = {
     state: StateType
-    addPostCallback: (textPost: string) => void
+    addPostCallback: () => void
+    updateNewPostTextCallback: (textPost: string) => void
 }
 
 
@@ -34,14 +35,17 @@ function App(props: PropsType) {
                         <Route
                             path={'/profile/*'}
                             element={<Profile
-                                state={props.state.profilePage}
+                                postsData={props.state.profilePage.postsData}
+                                newPostText={props.state.profilePage.newPostText}
                                 addPostCallback={props.addPostCallback}
+                                updateNewPostTextCallback={props.updateNewPostTextCallback}
                             />}
                         />
                         <Route
                             path={'/messages/*'}
                             element={<Messages
-                                state={props.state.messagesPage}
+                                dialogsData={props.state.messagesPage.dialogsData}
+                                messagesData={props.state.messagesPage.messagesData}
                             />}
                         />
 

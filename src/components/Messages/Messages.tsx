@@ -2,17 +2,18 @@ import React, {createRef} from 'react';
 import d from './Messages.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {MessagesPageType} from '../../redux/state';
+import {DialogsDataType, MessagesDataType, MessagesPageType} from '../../redux/state';
 
 
 type PropsType = {
-    state: MessagesPageType
+    dialogsData: DialogsDataType
+    messagesData: MessagesDataType
 }
 
 export function Messages(props: PropsType) {
 
-    const dialogsList = props.state.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>);
-    const messageList = props.state.messagesData.map(m => <Message message={m.message}/>);
+    const dialogsList = props.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>);
+    const messageList = props.messagesData.map(m => <Message message={m.message}/>);
 
 
     const newMessageElement = createRef<HTMLTextAreaElement>()
@@ -37,8 +38,8 @@ export function Messages(props: PropsType) {
                                   cols={40}
                                   rows={5}
                                   placeholder="Your message..."
-                        >
-                        </textarea>
+                        />
+
 
                         <div className={d['wrap-btn']}>
                             <button onClick={addMessageHandler}

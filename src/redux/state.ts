@@ -23,6 +23,7 @@ export type MessagesType = {
 
 export type ProfilePageType = {
     postsData: PostsDataType
+    newPostText: string
 
 }
 export type MessagesPageType = {
@@ -38,6 +39,7 @@ export type StateType = {
 
 export const state: StateType = {
     profilePage: {
+        newPostText: '',
         postsData: [
             {
                 id: v1(),
@@ -75,14 +77,21 @@ export const state: StateType = {
     // sidebar: {}
 }
 
-export const addPost = (textPost: string) => {
+export const addPost = () => {
 
     const newPost: PostType = {
         id: v1(),
-        message: textPost,
+        message: state.profilePage.newPostText,
         likesCount: 0
     }
 
     state.profilePage.postsData.push(newPost)
+
+    state.profilePage.newPostText = '';
+    renderTree(state)
+}
+export const updateNewPostText = (newText: string) => {
+
+    state.profilePage.newPostText = newText
     renderTree(state)
 }
