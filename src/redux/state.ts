@@ -1,5 +1,4 @@
 import {v1} from 'uuid';
-import {renderTree} from '../render';
 
 export type PostsDataType = Array<PostType>
 export type PostType = {
@@ -36,6 +35,7 @@ export type StateType = {
     messagesPage: MessagesPageType
     // sidebar: object
 }
+
 
 export const state: StateType = {
     profilePage: {
@@ -75,6 +75,13 @@ export const state: StateType = {
         ],
     },
     // sidebar: {}
+}
+
+let renderTree: (state: StateType) => void = () => {
+}
+
+export const subscribe = (observer: (state: StateType) => void) => {
+    renderTree = observer
 }
 
 export const addPost = () => {
