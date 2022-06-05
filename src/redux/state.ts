@@ -90,8 +90,9 @@ export const addPost = () => {
     state.profilePage.newPostText = '';
     renderTree(state)
 }
-export const updateNewPostText = (newText: string) => {
 
+
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     renderTree(state)
 }

@@ -2,7 +2,7 @@ import React, {createRef} from 'react';
 import d from './Messages.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {DialogsDataType, MessagesDataType, MessagesPageType} from '../../redux/state';
+import {DialogsDataType, MessagesDataType} from '../../redux/state';
 
 
 type PropsType = {

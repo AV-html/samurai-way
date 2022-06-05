@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import p from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {PostsDataType} from '../../../redux/state';
@@ -19,18 +19,12 @@ export function MyPosts(props: PropsType) {
         />
     ))
 
-    const newPostElement = React.createRef<HTMLTextAreaElement>()
-    
     const addPostHandler = () => {
-        if (newPostElement.current) {
-            props.addPostCallback();
-        }
+        props.addPostCallback();
     }
 
-    const onPostChangeHandler = () => {
-        if (newPostElement.current) {
-            props.updateNewPostTextCallback(newPostElement.current.value)
-        }
+    const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostTextCallback(e.currentTarget.value)
     }
 
     return (
@@ -38,8 +32,7 @@ export function MyPosts(props: PropsType) {
             <div className={p['new-post']}>
                 <h3 className={p['new-post-title']}>My posts</h3>
                 <div className={p['new-post-text']}>
-                    <textarea ref={newPostElement}
-                              cols={40}
+                    <textarea cols={40}
                               rows={5}
                               placeholder="Your news..."
                               value={props.newPostText}
@@ -53,8 +46,6 @@ export function MyPosts(props: PropsType) {
                         </button>
                     </div>
                 </div>
-
-
             </div>
             <ul className={p['post-list']}>
                 {postsList}
@@ -62,3 +53,5 @@ export function MyPosts(props: PropsType) {
         </>
     );
 }
+
+
