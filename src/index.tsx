@@ -1,10 +1,8 @@
-import {addPost, StateType, updateNewPostText} from './redux/state';
+import {StateType, store} from './redux/state';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import React from 'react';
 import './index.css';
-import {subscribe} from './redux/state';
-import {state} from './redux/state';
 
 
 const root = ReactDOM.createRoot(
@@ -15,10 +13,15 @@ const renderTree = (state: StateType) => {
     root.render(
         <App
             state={state}
-            addPostCallback={addPost}
-            updateNewPostTextCallback={updateNewPostText}
+            addPostCallback={() => {
+                store.addPost()
+            }}
+            updateNewPostTextCallback={(text) => {
+                store.updateNewPostText(text)
+            }}
         />,
     );
 }
-renderTree(state)
-subscribe(renderTree)
+
+renderTree(store.getState())
+store.subscribe(renderTree)
