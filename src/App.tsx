@@ -10,13 +10,12 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
-import {StateType} from './redux/state';
+import {ActionsType, StateType} from './redux/state';
 
 
 type PropsType = {
     state: StateType
-    addPostCallback: () => void
-    updateNewPostTextCallback: (textPost: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 
@@ -37,8 +36,7 @@ function App(props: PropsType) {
                             element={<Profile
                                 postsData={props.state.profilePage.postsData}
                                 newPostText={props.state.profilePage.newPostText}
-                                addPostCallback={props.addPostCallback}
-                                updateNewPostTextCallback={props.updateNewPostTextCallback}
+                                dispatch={props.dispatch}
                             />}
                         />
                         <Route

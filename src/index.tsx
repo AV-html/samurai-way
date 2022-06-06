@@ -13,12 +13,7 @@ const renderTree = (state: StateType) => {
     root.render(
         <App
             state={state}
-            addPostCallback={() => {
-                store.addPost()
-            }}
-            updateNewPostTextCallback={(text) => {
-                store.updateNewPostText(text)
-            }}
+            dispatch={store.dispatch.bind(store)}
         />,
     );
 }
