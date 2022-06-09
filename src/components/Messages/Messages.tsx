@@ -1,13 +1,21 @@
-import React, {createRef} from 'react';
+import React, {ChangeEvent} from 'react';
 import d from './Messages.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {DialogsDataType, MessagesDataType} from '../../redux/state';
+import {
+    ActionsType,
+    addMessageActionCreator,
+    DialogsDataType,
+    MessagesDataType,
+    updateNewMessageActionCreator
+} from '../../redux/state';
 
 
 type PropsType = {
     dialogsData: DialogsDataType
     messagesData: MessagesDataType
+    newPostText: string
+    dispatch: (action: ActionsType) => void
 }
 
 export function Messages(props: PropsType) {
@@ -16,9 +24,12 @@ export function Messages(props: PropsType) {
     const messageList = props.messagesData.map(m => <Message message={m.message}/>);
 
 
-    const newMessageElement = createRef<HTMLTextAreaElement>()
     const addMessageHandler = () => {
-        alert(newMessageElement.current?.value)
+        props.dispatch(addMessageActionCreator())
+    }
+
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(updateNewMessageActionCreator(e.currentTarget.value))
     }
 
     return (
@@ -34,10 +45,11 @@ export function Messages(props: PropsType) {
                         {messageList}
                     </ul>
                     <div className={d['new-message-text']}>
-                        <textarea ref={newMessageElement}
-                                  cols={40}
+                        <textarea cols={40}
                                   rows={5}
                                   placeholder="Your message..."
+                                  onChange={onChangeHandler}
+                                  value={props.newPostText}
                         />
 
 

@@ -43,7 +43,10 @@ function App(props: PropsType) {
                             path={'/messages/*'}
                             element={<Messages
                                 dialogsData={props.state.messagesPage.dialogsData}
+
                                 messagesData={props.state.messagesPage.messagesData}
+                                newPostText={props.state.messagesPage.newMessageText}
+                                dispatch={props.dispatch}
                             />}
                         />
 

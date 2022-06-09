@@ -1,5 +1,10 @@
 import {v1} from 'uuid';
 
+const ADD_POST = 'ADD_POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+const ADD_MESSAGE = 'ADD_MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
+
 export type PostsDataType = Array<PostType>
 export type PostType = {
     id: string
@@ -13,8 +18,8 @@ export type DialogType = {
     name: string
 }
 
-export type MessagesDataType = Array<MessagesType>
-export type MessagesType = {
+export type MessagesDataType = Array<MessageType>
+export type MessageType = {
     id: string
     message: string
 }
@@ -26,6 +31,7 @@ export type ProfilePageType = {
 
 }
 export type MessagesPageType = {
+    newMessageText: string
     messagesData: MessagesDataType
     dialogsData: DialogsDataType
 }
@@ -43,15 +49,6 @@ export type StoreType = {
     subscribe: (observer: (state: StateType) => void) => void
     getState: () => StateType
     dispatch: (action: ActionsType) => void
-}
-
-export type ActionsType = AddPostActionType | updateNewPostTextActionType
-export type AddPostActionType = {
-    type: 'ADD_POST'
-}
-export type updateNewPostTextActionType = {
-    type: 'UPDATE_NEW_POST_TEXT'
-    postText: string
 }
 
 
@@ -78,6 +75,7 @@ export const store: StoreType = {
             ],
         },
         messagesPage: {
+            newMessageText: '',
             messagesData: [
                 {id: '1', message: 'Hello!'},
                 {id: '2', message: 'Hi!!!'},
@@ -95,7 +93,7 @@ export const store: StoreType = {
         },
         // sidebar: {}
     },
-    _renderTree(state) {
+    _renderTree() {
     },
     subscribe(observer) {
         this._renderTree = observer
@@ -104,7 +102,7 @@ export const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD_POST') {
+        if (action.type === ADD_POST) {
             const newPost: PostType = {
                 id: v1(),
                 message: this._state.profilePage.newPostText,
@@ -113,13 +111,42 @@ export const store: StoreType = {
             this._state.profilePage.postsData.push(newPost)
             this._state.profilePage.newPostText = '';
             this._renderTree(this._state)
-        } else if (action.type === 'UPDATE_NEW_POST_TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.postText
+            this._renderTree(this._state)
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.messagesPage.newMessageText = action.messageText
+            this._renderTree(this._state)
+        } else if (action.type === ADD_MESSAGE) {
+            const newMessage: MessageType = {
+                id: v1(),
+                message: this._state.messagesPage.newMessageText,
+            }
+            this._state.messagesPage.messagesData.push(newMessage)
+            this._state.messagesPage.newMessageText = '';
             this._renderTree(this._state)
         }
     }
 }
 
 
+export type ActionsType =
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostActionCreator> |
+    ReturnType<typeof addMessageActionCreator> |
+    ReturnType<typeof updateNewMessageActionCreator>
+
+
+export const addPostActionCreator = () => ({type: ADD_POST} as const)
+export const updateNewPostActionCreator = (postText: string) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    postText: postText
+} as const)
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
+export const updateNewMessageActionCreator = (messageText: string) => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    messageText: messageText
+} as const)
 
 
