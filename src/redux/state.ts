@@ -1,9 +1,7 @@
 import {v1} from 'uuid';
+import {PostActionsType, profileReducer} from './profile-reducer';
+import {MessageActionsType, messagesReducer} from './messages-reducer';
 
-const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
 
 export type PostsDataType = Array<PostType>
 export type PostType = {
@@ -102,51 +100,17 @@ export const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost: PostType = {
-                id: v1(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.postsData.push(newPost)
-            this._state.profilePage.newPostText = '';
-            this._renderTree(this._state)
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.postText
-            this._renderTree(this._state)
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.messagesPage.newMessageText = action.messageText
-            this._renderTree(this._state)
-        } else if (action.type === ADD_MESSAGE) {
-            const newMessage: MessageType = {
-                id: v1(),
-                message: this._state.messagesPage.newMessageText,
-            }
-            this._state.messagesPage.messagesData.push(newMessage)
-            this._state.messagesPage.newMessageText = '';
-            this._renderTree(this._state)
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.messagesPage = messagesReducer(this._state.messagesPage, action);
+        // this._state.sidebar
+        this._renderTree(this._state)
     }
 }
 
 
-export type ActionsType =
-    ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostActionCreator> |
-    ReturnType<typeof addMessageActionCreator> |
-    ReturnType<typeof updateNewMessageActionCreator>
+export type ActionsType = PostActionsType | MessageActionsType
 
 
-export const addPostActionCreator = () => ({type: ADD_POST} as const)
-export const updateNewPostActionCreator = (postText: string) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    postText: postText
-} as const)
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
-export const updateNewMessageActionCreator = (messageText: string) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    messageText: messageText
-} as const)
 
 
