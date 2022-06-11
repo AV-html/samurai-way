@@ -40,7 +40,6 @@ export type StateType = {
 export type StoreType = {
     _state: StateType
     _renderTree: (state: StateType) => void
-
     subscribe: (observer: (state: StateType) => void) => void
     getState: () => StateType
     dispatch: (action: ActionsType) => void

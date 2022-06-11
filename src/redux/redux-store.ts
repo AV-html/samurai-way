@@ -10,3 +10,4 @@ let reducers = combineReducers({
 })
 
 export const store = legacy_createStore(reducers);
+export type StoreType = typeof store

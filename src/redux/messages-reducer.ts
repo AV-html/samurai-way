@@ -45,7 +45,7 @@ const initialState: MessagesPageType = {
 }
 
 
-export const messagesReducer = (state: MessagesPageType = initialState, action: ActionsType) => {
+export const messagesReducer = (state: MessagesPageType = initialState, action: ActionsType): MessagesPageType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
             state.newMessageText = action.messageText

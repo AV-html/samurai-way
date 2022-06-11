@@ -4,22 +4,15 @@ import './App.css';
 import {Header} from './components/Header/Header';
 import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
-import {Messages} from './components/Messages/Messages';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
-import {ActionsType, StateType} from './redux/store';
+import {MessagesContainer} from './components/Messages/MessagesContainer';
 
 
-type PropsType = {
-    state: StateType
-    dispatch: (action: ActionsType) => void
-}
-
-
-function App(props: PropsType) {
+function App() {
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
@@ -33,21 +26,11 @@ function App(props: PropsType) {
                         />
                         <Route
                             path={'/profile/*'}
-                            element={<Profile
-                                postsData={props.state.profilePage.postsData}
-                                newPostText={props.state.profilePage.newPostText}
-                                dispatch={props.dispatch}
-                            />}
+                            element={<Profile/>}
                         />
                         <Route
                             path={'/messages/*'}
-                            element={<Messages
-                                dialogsData={props.state.messagesPage.dialogsData}
-
-                                messagesData={props.state.messagesPage.messagesData}
-                                newPostText={props.state.messagesPage.newMessageText}
-                                dispatch={props.dispatch}
-                            />}
+                            element={<MessagesContainer/>}
                         />
 
                         <Route path={'/news/*'} element={<News/>}/>
