@@ -1,4 +1,5 @@
-import {StateType, store} from './redux/state';
+import {StateType} from './redux/store';
+import {store} from './redux/redux-store';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import React from 'react';
@@ -19,4 +20,6 @@ const renderTree = (state: StateType) => {
 }
 
 renderTree(store.getState())
-store.subscribe(renderTree)
+store.subscribe(() => {
+    renderTree(store.getState())
+})

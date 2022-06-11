@@ -10,7 +10,7 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
-import {ActionsType, StateType} from './redux/state';
+import {ActionsType, StateType} from './redux/store';
 
 
 type PropsType = {
