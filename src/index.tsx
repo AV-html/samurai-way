@@ -10,12 +10,8 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-const renderTree = () => {
-    root.render(
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    )
-}
-renderTree()
-store.subscribe(renderTree)
+root.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>
+)

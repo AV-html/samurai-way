@@ -14,3 +14,7 @@ export const store = legacy_createStore(rootReducer);
 export type AppStateType = ReturnType<typeof rootReducer>
 
 export type ActionsType = PostActionsType | MessageActionsType
+
+
+// @ts-ignore
+window.store = store
