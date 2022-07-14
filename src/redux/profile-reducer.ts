@@ -1,5 +1,5 @@
-import {ActionsType} from './store';
 import {v1} from 'uuid';
+import {ActionsType} from './redux-store';
 
 export type PostActionsType =
     ReturnType<typeof addPostActionCreator> |
@@ -51,6 +51,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             }
             state.postsData.push(newPost)
             state.newPostText = '';
+
             return state;
 
         case UPDATE_NEW_POST_TEXT:
@@ -64,5 +65,5 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
 export const updateNewPostActionCreator = (postText: string) => ({
     type: UPDATE_NEW_POST_TEXT,
-    postText: postText
+    postText
 } as const)

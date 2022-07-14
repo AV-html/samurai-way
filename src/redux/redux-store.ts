@@ -1,13 +1,16 @@
 import {combineReducers, legacy_createStore} from 'redux'
-import {profileReducer} from './profile-reducer';
-import {messagesReducer} from './messages-reducer';
+import {PostActionsType, profileReducer} from './profile-reducer';
+import {MessageActionsType, messagesReducer} from './messages-reducer';
 
 
-let reducers = combineReducers({
+const rootReducer = combineReducers({
     // profileReducer: profileReducer
     profilePage: profileReducer,
     messagesPage: messagesReducer
 })
 
-export const store = legacy_createStore(reducers);
-export type StoreType = typeof store
+export const store = legacy_createStore(rootReducer);
+
+export type AppStateType = ReturnType<typeof rootReducer>
+
+export type ActionsType = PostActionsType | MessageActionsType

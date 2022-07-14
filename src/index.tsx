@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import React from 'react';
 import './index.css';
-import {StoreContext} from './StoreContext';
+import {Provider} from 'react-redux';
 
 
 const root = ReactDOM.createRoot(
@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(
 
 const renderTree = () => {
     root.render(
-        <StoreContext.Provider value={store}>
+        <Provider store={store}>
             <App/>
-        </StoreContext.Provider>
+        </Provider>
     )
 }
 renderTree()

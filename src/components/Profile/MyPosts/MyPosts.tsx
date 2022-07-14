@@ -1,18 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import p from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import {PostsDataType} from '../../../redux/store';
+import {MyPostsPropsType} from './MyPostContainer';
 
 
-type PropsType = {
-    postsData: PostsDataType
-    newPostText: string
-    addPost: () => void
-    updateNewPostActionCreator: (text: string) => void
-}
-
-
-export function MyPosts(props: PropsType) {
+export function MyPosts(props: MyPostsPropsType) {
     const postsList = props.postsData.map(p => (
         <Post
             message={p.message}
