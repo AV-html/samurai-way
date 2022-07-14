@@ -1,8 +1,6 @@
 import {Messages} from './Messages';
 import {
-    addMessageActionCreator,
-    DialogsDataType,
-    MessagesDataType,
+    addMessageActionCreator, DialogType, MessageType,
     updateNewMessageActionCreator
 } from '../../redux/messages-reducer';
 import {connect} from 'react-redux';
@@ -40,8 +38,8 @@ import {Dispatch} from 'redux';
 // }
 
 type MapStateToProps = {
-    dialogsData: DialogsDataType
-    messagesData: MessagesDataType
+    dialogsData: Array<DialogType>
+    messagesData: Array<MessageType>
     newMessageText: string
 }
 

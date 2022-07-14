@@ -1,4 +1,8 @@
-import {addPostActionCreator, PostsDataType, updateNewPostActionCreator} from '../../../redux/profile-reducer';
+import {
+    addPostActionCreator,
+    PostType,
+    updateNewPostActionCreator
+} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../redux/redux-store';
@@ -6,7 +10,7 @@ import {Dispatch} from 'redux';
 
 
 type MapStateToProps = {
-    postsData: PostsDataType
+    postsData: Array<PostType>
     newPostText: string
 }
 

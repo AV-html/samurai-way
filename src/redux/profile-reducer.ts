@@ -14,13 +14,9 @@ export type PostType = {
     message: string
     likesCount: number
 }
-export type PostsDataType = Array<PostType>
-export type ProfilePageType = {
-    postsData: PostsDataType
-    newPostText: string
-}
+export type ProfilePageType = typeof initialState
 
-const initialState: ProfilePageType = {
+const initialState = {
     newPostText: '',
     postsData: [
         {
@@ -38,7 +34,7 @@ const initialState: ProfilePageType = {
             message: 'Adipisci aut culpa doloremque dolorum, exercitationem libero nam odit porro quaerat sequ',
             likesCount: 2
         }
-    ],
+    ] as Array<PostType>,
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
