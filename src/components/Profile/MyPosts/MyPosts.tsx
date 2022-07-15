@@ -7,6 +7,7 @@ import {MyPostsPropsType} from './MyPostContainer';
 export function MyPosts(props: MyPostsPropsType) {
     const postsList = props.postsData.map(p => (
         <Post
+            key={p.id}
             message={p.message}
             likesCount={p.likesCount}
         />

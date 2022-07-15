@@ -16,7 +16,11 @@
 
 .item:last-child {
     margin-top: 35px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
+}
+
+.item:nth-last-child(2) {
+    margin-top: 35px;
 }
 
 .item a {

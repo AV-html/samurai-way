@@ -27,6 +27,9 @@ export function Navbar() {
                     <NavLink to="/music" className={getActiveClass}>Music</NavLink>
                 </li>
                 <li className={n.item}>
+                    <NavLink to="/users" className={getActiveClass}>Users</NavLink>
+                </li>
+                <li className={n.item}>
                     <NavLink to="/settings" className={getActiveClass}>Settings</NavLink>
                 </li>
             </ul>

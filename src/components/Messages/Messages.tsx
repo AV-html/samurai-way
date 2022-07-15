@@ -7,8 +7,21 @@ import {MessagesPropsType} from './MessagesContainer';
 
 export function Messages(props: MessagesPropsType) {
 
-    const dialogsList = props.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>);
-    const messageList = props.messagesData.map(m => <Message message={m.message}/>);
+    const dialogsList = props.dialogsData.map((d) => {
+            return <DialogItem
+                key={d.id}
+                id={d.id}
+                name={d.name}
+            />
+        }
+    );
+    const messageList = props.messagesData.map((m) => {
+            return <Message
+                key={m.id}
+                message={m.message}
+            />
+        }
+    );
 
 
     const addMessageHandler = () => {
