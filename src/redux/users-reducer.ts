@@ -4,18 +4,29 @@ import {ActionsType} from './redux-store';
 export const CHANGE_FOLLOW_USER = 'CHANGE_FOLLOW_USER';
 export const SET_USERS = 'SET_USERS';
 
-export type UserType = {
-    id: string
-    name: string
-    isFollow: boolean
-    status: string
-    avatar?: string
-    location: LocationType
+
+export type PhotosType = {
+    small: null | string
+    large: null | string
 }
+
+export type UserType = {
+    name: string
+    id: number
+    photos: PhotosType
+    status?: string
+    followed: boolean
+
+    // uniqueUrlName: null | string
+
+    // location: LocationType
+}
+
 export type LocationType = {
     country: string
     city: string
 }
+
 export type UsersPageType = typeof initialState
 
 export type UsersActionsType = ChangeFollowAT | SetUsersAT
@@ -32,7 +43,7 @@ export const userReducer = (state: UsersPageType = initialState, action: Actions
         case CHANGE_FOLLOW_USER:
             return {
                 ...state,
-                users: state.users.map((u) => u.id === action.userID ? {...u, isFollow: action.isFollow} : u)
+                users: state.users.map((u) => u.id === action.id ? {...u, followed: action.followed} : u)
             }
         case SET_USERS:
             return {
@@ -45,10 +56,10 @@ export const userReducer = (state: UsersPageType = initialState, action: Actions
 }
 
 
-export const changeFollowAC = (userID: string, isFollow: boolean) => ({
+export const changeFollowAC = (id: number, followed: boolean) => ({
     type: CHANGE_FOLLOW_USER,
-    userID,
-    isFollow
+    id,
+    followed
 }) as const
 
 export const setUsersAC = (users: Array<UserType>) => ({

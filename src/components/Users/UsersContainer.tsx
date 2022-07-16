@@ -11,7 +11,7 @@ type MapStateToProps = {
     users: Array<UserType>
 }
 type MapDispatchToProps = {
-    changeFollow: (userID: string, isFollow: boolean) => void
+    changeFollow: (userID: number, followed: boolean) => void
     setUsers: (users: Array<UserType>) => void
 }
 
@@ -20,8 +20,8 @@ const mapStateToProps = (state: AppStateType) => ({
     users: state.usersPage.users
 })
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    changeFollow: (userID: string, isFollow: boolean) => {
-        dispatch(changeFollowAC(userID, isFollow))
+    changeFollow: (userID: number, followed: boolean) => {
+        dispatch(changeFollowAC(userID, followed))
     },
     setUsers: (users: Array<UserType>) => {
         dispatch(setUsersAC(users))

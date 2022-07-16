@@ -1,45 +1,47 @@
 import React from 'react';
 import styles from './User.module.css'
+import {UserType} from '../../../redux/users-reducer';
+import avatar from './../../../assets/images/avatar.png'
 
 
 type PropsType = {
-    name: string
-    country: string
-    city: string
-    isFollow: boolean
-    status: string
-    avatar?: string
+    user: UserType
     changeFollow: () => void
 }
 
-export function User(props: PropsType) {
+export const User: React.FC<PropsType> = (
+    {
+        user,
+        changeFollow
+    }) => {
+
     const onFollowClickHandler = () => {
-        props.changeFollow()
+        changeFollow()
     };
 
     return (
         <li className={styles.user}>
             <div className={styles.avatar}>
                 <img
-                    src={props.avatar ? props.avatar : 'https://www.montrealtherapy.com/wp-content/uploads/2016/07/avatars-4.png'}
+                    src={user.photos?.small ? user.photos.small : avatar}
                     alt="user avatar"/>
                 <button
                     onClick={onFollowClickHandler}
-                    className={props.isFollow ? styles.follow : `${styles.follow} ${styles.unfollow}`}
+                    className={user.followed ? styles.follow : `${styles.follow} ${styles.unfollow}`}
                 >
-                    {props.isFollow ? 'Follow' : 'Unfollow'}
+                    {user.followed ? 'Follow' : 'Unfollow'}
                 </button>
             </div>
             <div className={styles.body}>
                 <div className={styles.info}>
-                    <div className={styles.name}>{props.name}</div>
-                    <div className={styles.status}>{props.status}</div>
+                    <div className={styles.name}>{user.name}</div>
+                    <div className={styles.status}>{user.status}</div>
                 </div>
                 <div className={styles.address}>
-                    <div className={styles.country}>{props.country},</div>
-                    <div className={styles.city}>{props.city}</div>
+                    <div className={styles.country}>user.location.country,</div>
+                    <div className={styles.city}>user.location.city</div>
                 </div>
             </div>
         </li>
     );
-}
+};

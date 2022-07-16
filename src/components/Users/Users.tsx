@@ -3,34 +3,52 @@ import React from 'react';
 import styles from './Users.module.css'
 import {User} from './User/User';
 import {UsersPropsType} from './UsersContainer';
-import {v1} from 'uuid';
+import axios from 'axios';
+import {UserType} from '../../redux/users-reducer';
 
+
+type ResponseType = {
+    items: UserType[]
+    totalCount: number
+    error: string | null
+}
 
 export const Users: React.FC<UsersPropsType> = (props) => {
+
+    if (props.users.length === 0) {
+        axios
+            .get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users')
+            .then((res) => props.setUsers(res.data.items))
+        // any - то, что лежит в data
+        // Типизировать можно в get<any>('...') ---> ResponseType
+    }
 
 
     function onShowMoreClickHandler() {
         props.setUsers([
             {
-                id: v1(),
+                id: 0,
                 name: 'Alexander V.',
                 status: 'I have an idea!',
-                isFollow: true,
-                location: {city: 'Moscow', country: 'Russia'}
+                followed: true,
+                photos: {small: null, large: null},
+                // uniqueUrlName: null
             },
             {
-                id: v1(),
+                id: 1,
                 name: 'Michael S.',
                 status: 'Another status...',
-                isFollow: false,
-                location: {city: 'Los Angelos', country: 'USA'}
+                followed: false,
+                photos: {small: null, large: null},
+                // uniqueUrlName: null
             },
             {
-                id: v1(),
+                id: 2,
                 name: 'Bob G.',
                 status: 'I came I saw I won!',
-                isFollow: false,
-                location: {city: 'London', country: 'Great Britain'}
+                followed: false,
+                photos: {small: null, large: null},
+                // uniqueUrlName: null
             }
         ])
     }
@@ -43,14 +61,9 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                     return (
                         <User
                             key={u.id}
-                            name={u.name}
-                            country={u.location.country}
-                            city={u.location.city}
-                            status={u.status}
-                            isFollow={u.isFollow}
-                            avatar={u.avatar}
+                            user={u}
 
-                            changeFollow={() => props.changeFollow(u.id, !u.isFollow)}
+                            changeFollow={() => props.changeFollow(u.id, !u.followed)}
                         />
                     )
                 })}
