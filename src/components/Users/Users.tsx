@@ -13,71 +13,57 @@ type ResponseType = {
     error: string | null
 }
 
-export const Users: React.FC<UsersPropsType> = (props) => {
+export class Users extends React.Component<UsersPropsType> {
 
-    if (props.users.length === 0) {
-        axios
-            .get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users')
-            .then((res) => props.setUsers(res.data.items))
-        // any - то, что лежит в data
-        // Типизировать можно в get<any>('...') ---> ResponseType
+    constructor(props: UsersPropsType) {
+        super(props);
+        if (!this.props.users.length) {
+            axios
+                .get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users')
+                .then((res) => this.props.setUsers(res.data.items))
+            // any - то, что лежит в data
+            // Типизировать можно в get<any>('...') ---> ResponseType
+        }
     }
 
+    onShowMoreClickHandler = () => {
+        // !!! then fix:
+        if (this.props.users.length === 0) {
+            axios
+                .get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users')
+                .then((res) => this.props.setUsers(res.data.items))
+            // any - то, что лежит в data
+            // Типизировать можно в get<any>('...') ---> ResponseType
+        }
+    };
 
-    function onShowMoreClickHandler() {
-        props.setUsers([
-            {
-                id: 0,
-                name: 'Alexander V.',
-                status: 'I have an idea!',
-                followed: true,
-                photos: {small: null, large: null},
-                // uniqueUrlName: null
-            },
-            {
-                id: 1,
-                name: 'Michael S.',
-                status: 'Another status...',
-                followed: false,
-                photos: {small: null, large: null},
-                // uniqueUrlName: null
-            },
-            {
-                id: 2,
-                name: 'Bob G.',
-                status: 'I came I saw I won!',
-                followed: false,
-                photos: {small: null, large: null},
-                // uniqueUrlName: null
-            }
-        ])
-    }
+    render() {
+        return (
+            <div className={styles.users}>
+                <h2 className={styles.title}>Users</h2>
+                <ul>
+                    {this.props.users.map((u) => {
+                        return (
+                            <User
+                                key={u.id}
+                                user={u}
 
-    return (
-        <div className={styles.users}>
-            <h2 className={styles.title}>Users</h2>
-            <ul>
-                {props.users.map((u) => {
-                    return (
-                        <User
-                            key={u.id}
-                            user={u}
-
-                            changeFollow={() => props.changeFollow(u.id, !u.followed)}
-                        />
-                    )
-                })}
+                                changeFollow={() => this.props.changeFollow(u.id, !u.followed)}
+                            />
+                        )
+                    })}
 
 
-            </ul>
-            <div className={styles['wrap-btn']}>
-                <button
-                    onClick={onShowMoreClickHandler}
-                    type={'button'}
-                >
-                    Show more
-                </button>
+                </ul>
+                <div className={styles['wrap-btn']}>
+                    <button
+                        onClick={this.onShowMoreClickHandler}
+                        type={'button'}
+                    >
+                        Show more
+                    </button>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
