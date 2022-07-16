@@ -17,12 +17,14 @@ export class Users extends React.Component<UsersPropsType> {
 
     constructor(props: UsersPropsType) {
         super(props);
+
+    }
+
+    componentDidMount() {
         if (!this.props.users.length) {
             axios
                 .get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users')
                 .then((res) => this.props.setUsers(res.data.items))
-            // any - то, что лежит в data
-            // Типизировать можно в get<any>('...') ---> ResponseType
         }
     }
 
