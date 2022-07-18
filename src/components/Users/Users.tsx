@@ -14,35 +14,58 @@ type ResponseType = {
 }
 
 export class Users extends React.Component<UsersPropsType> {
-
-    constructor(props: UsersPropsType) {
-        super(props);
-
-    }
-
     componentDidMount() {
-        if (!this.props.users.length) {
-            axios
-                .get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users')
-                .then((res) => this.props.setUsers(res.data.items))
-        }
+        axios
+            .get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then((res) => {
+                this.props.setUsers(res.data.items)
+                this.props.setTotalCount(res.data.totalCount)
+            })
     }
 
-    onShowMoreClickHandler = () => {
-        // !!! then fix:
-        if (this.props.users.length === 0) {
-            axios
-                .get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users')
-                .then((res) => this.props.setUsers(res.data.items))
-            // any - то, что лежит в data
-            // Типизировать можно в get<any>('...') ---> ResponseType
-        }
+    onPageChanged = (page: number) => {
+        this.props.setCurrentPage(page)
+        axios
+            .get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+            .then((res) => {
+                this.props.setUsers(res.data.items)
+            })
     };
 
+    onShowMoreClickHandler() {
+        // !!! then fix:
+    };
+
+
     render() {
+        // pagination
+        const pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        const pages: Array<number> = [];
+        for (let i = 1; i <= pageCount; i++) {
+            pages.push(i)
+        }
+        const currentPage = this.props.currentPage;
+        const firstPageIdx = currentPage - 3 < 0 ? 0 : currentPage - 3
+        const lastPageIdx = currentPage - 3 < 0 ? currentPage + 3 : currentPage + 2
+        const slicedPages = pages.slice(firstPageIdx, lastPageIdx)
+
         return (
             <div className={styles.users}>
                 <h2 className={styles.title}>Users</h2>
+
+                <div className={styles.pagination}>
+                    {slicedPages.map((page, i) => {
+
+
+                        return <button key={i}
+                                       className={page === currentPage ? `${styles.pagBtn} ${styles.selectedPage}` : styles.pagBtn}
+                                       type={'button'}
+                                       onClick={() => this.onPageChanged(page)}
+                        >
+                            {page}
+                        </button>
+                    })}
+                </div>
                 <ul>
                     {this.props.users.map((u) => {
                         return (

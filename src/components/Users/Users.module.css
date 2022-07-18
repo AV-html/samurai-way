@@ -9,6 +9,32 @@
 }
 
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.pagBtn {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 15px;
+    background-color: #f9e998;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.pagBtn:hover {
+    background-color: #A4080C;
+    color: #fff;
+}
+
+.selectedPage {
+    background-color: #A4080C;
+    color: #fff;
+}
+
+
 .wrap-btn {
     text-align: center;
 }

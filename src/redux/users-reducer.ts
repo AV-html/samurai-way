@@ -3,6 +3,8 @@ import {ActionsType} from './redux-store';
 
 export const CHANGE_FOLLOW_USER = 'CHANGE_FOLLOW_USER';
 export const SET_USERS = 'SET_USERS';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 
 
 export type PhotosType = {
@@ -16,9 +18,7 @@ export type UserType = {
     photos: PhotosType
     status?: string
     followed: boolean
-
     // uniqueUrlName: null | string
-
     // location: LocationType
 }
 
@@ -29,12 +29,18 @@ export type LocationType = {
 
 export type UsersPageType = typeof initialState
 
-export type UsersActionsType = ChangeFollowAT | SetUsersAT
-type ChangeFollowAT = ReturnType<typeof changeFollowAC>
-type SetUsersAT = ReturnType<typeof setUsersAC>
+export type UsersActionsType =
+    ReturnType<typeof changeFollowAC>
+    | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalCountAC>
+
 
 const initialState = {
-    users: [] as Array<UserType>
+    users: [] as Array<UserType>,
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 
@@ -48,7 +54,17 @@ export const userReducer = (state: UsersPageType = initialState, action: Actions
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case SET_TOTAL_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount
             }
     }
 
@@ -65,4 +81,14 @@ export const changeFollowAC = (id: number, followed: boolean) => ({
 export const setUsersAC = (users: Array<UserType>) => ({
     type: SET_USERS,
     users
+}) as const
+
+export const setCurrentPageAC = (currentPage: number) => ({
+    type: SET_CURRENT_PAGE,
+    currentPage
+}) as const
+
+export const setTotalCountAC = (totalUsersCount: number) => ({
+    type: SET_TOTAL_COUNT,
+    totalUsersCount
 }) as const
