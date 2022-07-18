@@ -1,10 +1,10 @@
 import {ActionsType} from './redux-store';
 
-
 export const CHANGE_FOLLOW_USER = 'CHANGE_FOLLOW_USER';
 export const SET_USERS = 'SET_USERS';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
+export const CHANGE_IS_FETCHING = 'CHANGE_IS_FETCHING';
 
 
 export type PhotosType = {
@@ -22,10 +22,10 @@ export type UserType = {
     // location: LocationType
 }
 
-export type LocationType = {
-    country: string
-    city: string
-}
+// export type LocationType = {
+//     country: string
+//     city: string
+// }
 
 export type UsersPageType = typeof initialState
 
@@ -34,13 +34,15 @@ export type UsersActionsType =
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalCountAC>
+    | ReturnType<typeof changeIsFetchingAC>
 
 
 const initialState = {
     users: [] as Array<UserType>,
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 
@@ -66,6 +68,12 @@ export const userReducer = (state: UsersPageType = initialState, action: Actions
                 ...state,
                 totalUsersCount: action.totalUsersCount
             }
+        case CHANGE_IS_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
     }
 
     return state
@@ -77,18 +85,19 @@ export const changeFollowAC = (id: number, followed: boolean) => ({
     id,
     followed
 }) as const
-
 export const setUsersAC = (users: Array<UserType>) => ({
     type: SET_USERS,
     users
 }) as const
-
 export const setCurrentPageAC = (currentPage: number) => ({
     type: SET_CURRENT_PAGE,
     currentPage
 }) as const
-
 export const setTotalCountAC = (totalUsersCount: number) => ({
     type: SET_TOTAL_COUNT,
     totalUsersCount
+}) as const
+export const changeIsFetchingAC = (isFetching: boolean) => ({
+    type: CHANGE_IS_FETCHING,
+    isFetching
 }) as const

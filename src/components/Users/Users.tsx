@@ -1,94 +1,68 @@
 import React from 'react';
-
-import styles from './Users.module.css'
 import {User} from './User/User';
-import {UsersPropsType} from './UsersContainer';
-import axios from 'axios';
+import styles from './Users.module.css'
 import {UserType} from '../../redux/users-reducer';
 
+type PropsType = {
+    totalUsersCount: number,
+    pageSize: number
+    currentPage: number
+    users: Array<UserType>
 
-type ResponseType = {
-    items: UserType[]
-    totalCount: number
-    error: string | null
+    onPageChanged: (page: number) => void
+    onShowMoreClickHandler: () => void
+    changeFollow: (id: number, followed: boolean) => void
 }
 
-export class Users extends React.Component<UsersPropsType> {
-    componentDidMount() {
-        axios
-            .get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then((res) => {
-                this.props.setUsers(res.data.items)
-                this.props.setTotalCount(res.data.totalCount)
-            })
+export function Users(props: PropsType) {
+    // pagination
+    const pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    const pages: Array<number> = [];
+    for (let i = 1; i <= pageCount; i++) {
+        pages.push(i)
     }
+    const currentPage = props.currentPage;
+    const firstPageIdx = currentPage - 3 < 0 ? 0 : currentPage - 3
+    const lastPageIdx = currentPage - 3 < 0 ? currentPage + 3 : currentPage + 2
+    const slicedPages = pages.slice(firstPageIdx, lastPageIdx)
 
-    onPageChanged = (page: number) => {
-        this.props.setCurrentPage(page)
-        axios
-            .get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then((res) => {
-                this.props.setUsers(res.data.items)
-            })
-    };
+    return (
+        <div className={styles.users}>
+            <h2 className={styles.title}>Users</h2>
 
-    onShowMoreClickHandler() {
-        // !!! then fix:
-    };
-
-
-    render() {
-        // pagination
-        const pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        const pages: Array<number> = [];
-        for (let i = 1; i <= pageCount; i++) {
-            pages.push(i)
-        }
-        const currentPage = this.props.currentPage;
-        const firstPageIdx = currentPage - 3 < 0 ? 0 : currentPage - 3
-        const lastPageIdx = currentPage - 3 < 0 ? currentPage + 3 : currentPage + 2
-        const slicedPages = pages.slice(firstPageIdx, lastPageIdx)
-
-        return (
-            <div className={styles.users}>
-                <h2 className={styles.title}>Users</h2>
-
-                <div className={styles.pagination}>
-                    {slicedPages.map((page, i) => {
-
-
-                        return <button key={i}
-                                       className={page === currentPage ? `${styles.pagBtn} ${styles.selectedPage}` : styles.pagBtn}
-                                       type={'button'}
-                                       onClick={() => this.onPageChanged(page)}
-                        >
-                            {page}
-                        </button>
-                    })}
-                </div>
-                <ul>
-                    {this.props.users.map((u) => {
-                        return (
-                            <User
-                                key={u.id}
-                                user={u}
-
-                                changeFollow={() => this.props.changeFollow(u.id, !u.followed)}
-                            />
-                        )
-                    })}
-
-
-                </ul>
-                <div className={styles['wrap-btn']}>
-                    <button
-                        onClick={this.onShowMoreClickHandler}
-                        type={'button'}
+            <div className={styles.pagination}>
+                {slicedPages.map((page, i) => {
+                    return <button key={i}
+                                   className={page === currentPage ? `${styles.pagBtn} ${styles.selectedPage}` : styles.pagBtn}
+                                   type={'button'}
+                                   onClick={() => props.onPageChanged(page)}
                     >
-                        Show more
+                        {page}
                     </button>
-                </div>
+                })}
             </div>
-        );
-    }
+            <ul>
+                {props.users.map((u) => {
+                    return (
+                        <User
+                            key={u.id}
+                            user={u}
+
+                            changeFollow={() => props.changeFollow(u.id, !u.followed)}
+                        />
+                    )
+                })}
+
+
+            </ul>
+            <div className={styles['wrap-btn']}>
+                <button
+                    onClick={props.onShowMoreClickHandler}
+                    type={'button'}
+                >
+                    Show more
+                </button>
+            </div>
+        </div>
+    );
 }
