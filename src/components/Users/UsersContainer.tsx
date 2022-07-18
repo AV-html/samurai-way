@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
-import {Dispatch} from 'redux';
+
 import {
-    changeFollowAC,
-    changeIsFetchingAC,
-    setCurrentPageAC,
-    setTotalCountAC,
-    setUsersAC,
+    changeFollow,
+    changeIsFetching,
+    setCurrentPage,
+    setTotalCount,
+    setUsers,
     UserType
 } from '../../redux/users-reducer';
 import React from 'react';
@@ -97,22 +97,29 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => ({
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching
 })
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => ({
-    changeFollow: (userID: number, followed: boolean) => {
-        dispatch(changeFollowAC(userID, followed))
-    },
-    setUsers: (users: Array<UserType>) => {
-        dispatch(setUsersAC(users))
-    },
-    setCurrentPage: (currentPage: number) => {
-        dispatch(setCurrentPageAC(currentPage))
-    },
-    setTotalCount: (totalUsersCount: number) => {
-        dispatch(setTotalCountAC(totalUsersCount))
-    },
-    changeIsFetching: (isFetching: boolean) => {
-        dispatch(changeIsFetchingAC(isFetching))
-    }
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => ({
+//     changeFollow: (userID: number, followed: boolean) => {
+//         dispatch(changeFollowAC(userID, followed))
+//     },
+//     setUsers: (users: Array<UserType>) => {
+//         dispatch(setUsersAC(users))
+//     },
+//     setCurrentPage: (currentPage: number) => {
+//         dispatch(setCurrentPageAC(currentPage))
+//     },
+//     setTotalCount: (totalUsersCount: number) => {
+//         dispatch(setTotalCountAC(totalUsersCount))
+//     },
+//     changeIsFetching: (isFetching: boolean) => {
+//         dispatch(changeIsFetchingAC(isFetching))
+//     }
+// })
+
+export default connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(mapStateToProps, {
+    changeFollow,
+    setUsers,
+    setCurrentPage,
+    setTotalCount,
+    changeIsFetching
+})(UsersContainer);

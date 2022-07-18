@@ -12,8 +12,8 @@ export type MessageType = {
 }
 
 export type MessageActionsType =
-    ReturnType<typeof addMessageActionCreator> |
-    ReturnType<typeof updateNewMessageActionCreator>
+    ReturnType<typeof addMessage> |
+    ReturnType<typeof updateNewMessage>
 
 const ADD_MESSAGE = 'ADD_MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
@@ -62,8 +62,8 @@ export const messagesReducer = (state: MessagesPageType = initialState, action: 
     }
 }
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
-export const updateNewMessageActionCreator = (messageText: string) => ({
+export const addMessage = () => ({type: ADD_MESSAGE} as const)
+export const updateNewMessage = (messageText: string) => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     messageText: messageText
 } as const)

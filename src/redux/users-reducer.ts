@@ -30,11 +30,11 @@ export type UserType = {
 export type UsersPageType = typeof initialState
 
 export type UsersActionsType =
-    ReturnType<typeof changeFollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalCountAC>
-    | ReturnType<typeof changeIsFetchingAC>
+    ReturnType<typeof changeFollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalCount>
+    | ReturnType<typeof changeIsFetching>
 
 
 const initialState = {
@@ -80,24 +80,24 @@ export const userReducer = (state: UsersPageType = initialState, action: Actions
 }
 
 
-export const changeFollowAC = (id: number, followed: boolean) => ({
+export const changeFollow = (id: number, followed: boolean) => ({
     type: CHANGE_FOLLOW_USER,
     id,
     followed
 }) as const
-export const setUsersAC = (users: Array<UserType>) => ({
+export const setUsers = (users: Array<UserType>) => ({
     type: SET_USERS,
     users
 }) as const
-export const setCurrentPageAC = (currentPage: number) => ({
+export const setCurrentPage = (currentPage: number) => ({
     type: SET_CURRENT_PAGE,
     currentPage
 }) as const
-export const setTotalCountAC = (totalUsersCount: number) => ({
+export const setTotalCount = (totalUsersCount: number) => ({
     type: SET_TOTAL_COUNT,
     totalUsersCount
 }) as const
-export const changeIsFetchingAC = (isFetching: boolean) => ({
+export const changeIsFetching = (isFetching: boolean) => ({
     type: CHANGE_IS_FETCHING,
     isFetching
 }) as const

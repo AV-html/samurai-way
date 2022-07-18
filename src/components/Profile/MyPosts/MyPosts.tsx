@@ -19,7 +19,7 @@ export function MyPosts(props: MyPostsPropsType) {
     }
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostActionCreator(e.currentTarget.value)
+        props.updateNewPost(e.currentTarget.value)
         // props.dispatch(updateNewPostActionCreator(e.currentTarget.value))
     }
 
