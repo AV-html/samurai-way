@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './User.module.css'
 import {UserType} from '../../../redux/users-reducer';
 import avatar from './../../../assets/images/avatar.png'
+import {Link} from 'react-router-dom';
 
 
 type PropsType = {
@@ -22,9 +23,13 @@ export const User: React.FC<PropsType> = (
     return (
         <li className={styles.user}>
             <div className={styles.avatar}>
-                <img
-                    src={user.photos?.small ? user.photos.small : avatar}
-                    alt="user avatar"/>
+                <Link to={`/profile/${user.id}`}>
+                    <img
+                        src={user.photos?.small ? user.photos.small : avatar}
+                        alt="user avatar"/>
+                </Link>
+
+
                 <button
                     onClick={onFollowClickHandler}
                     className={user.followed ? styles.follow : `${styles.follow} ${styles.unfollow}`}

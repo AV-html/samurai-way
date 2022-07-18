@@ -1,7 +1,14 @@
 import p from './ProfileInfo.module.css';
 import React from 'react';
+import {ProfileContainerPropsType} from '../ProfileContainer';
+import avatar from './../../../assets/images/avatar.png'
+import {Preloader} from '../../common/Preloader/Preloader';
 
-export function ProfileInfo() {
+export function ProfileInfo({profile}: ProfileContainerPropsType) {
+    if (!profile) {
+        return <Preloader/>
+    }
+    
     return (
         <>
             <div className={p['profile-header']}>
@@ -11,30 +18,42 @@ export function ProfileInfo() {
             </div>
             <div className={p['profile-info']}>
                 <div className={p['profile-avatar']}>
-                    <img src="https://www.montrealtherapy.com/wp-content/uploads/2016/07/avatars-4.png"
+                    <img src={profile.photos.large ? profile.photos.large : avatar}
                          alt="avatar"/>
                 </div>
                 <div className={p['profile-desc']}>
                     <div className={p['desc-name']}>
-                        Alexander Volkov
+                        {profile.fullName}
                     </div>
+                    <h3>About me:</h3>
                     <div className={p['desc-date']}>
-                        Date: 30 october
+                        {profile.aboutMe}
+                        {profile.lookingForAJob}
+                        {profile.lookingForAJobDescription}
                     </div>
-                    <div className={p['desc-city']}>
-                        City: Moscow
-                    </div>
-                    <div className={p['desc-educ']}>
-                        Education: MAI'20
-                    </div>
-                    <div className={p['desc-site']}>
-                        <span>WebSite: </span>
-                        <a href="https://github.com/AV-html"
-                           target={'_blank'}
-                           rel="noopener noreferrer">
-                            github-page
-                        </a>
-                    </div>
+                    <h3>Contacts:</h3>
+                    <ul>
+                        {
+                            profile.contacts.vk !== null ?
+                                (
+                                    <li className={p['desc-site']}>
+                                        <a href={profile.contacts.vk}
+                                           target={'_blank'}
+                                           rel="noopener noreferrer">VK</a>
+                                    </li>
+                                ) : null
+                        }
+                        {
+                            profile.contacts.github !== null ?
+                                (
+                                    <li className={p['desc-site']}>
+                                        <a href={profile.contacts.github}
+                                           target={'_blank'}
+                                           rel="noopener noreferrer">GitHub</a>
+                                    </li>
+                                ) : null
+                        }
+                    </ul>
                 </div>
             </div>
         </>

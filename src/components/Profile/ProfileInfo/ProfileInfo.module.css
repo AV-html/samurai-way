@@ -25,6 +25,7 @@
 }
 
 .profile-avatar img {
+    border-radius: 50%;
     max-width: 100%;
 }
 
@@ -44,17 +45,6 @@
     margin-bottom: 15px;
 }
 
-.desc-date {
-
-}
-
-.desc-city {
-
-}
-
-.desc-educ {
-
-}
 
 .desc-site a {
     text-decoration: none;
