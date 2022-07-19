@@ -8,17 +8,23 @@ import {Link} from 'react-router-dom';
 type PropsType = {
     user: UserType
     changeFollow: () => void
+    followingInProgress: Array<number>
 }
 
 export const User: React.FC<PropsType> = (
     {
         user,
-        changeFollow
+        changeFollow,
+        followingInProgress
     }) => {
 
     const onFollowClickHandler = () => {
         changeFollow()
     };
+
+
+    const followedClass = user.followed ? styles.follow : `${styles.follow} ${styles.unfollow}`
+    const resultClassName = `${followedClass}`
 
     return (
         <li className={styles.user}>
@@ -32,7 +38,8 @@ export const User: React.FC<PropsType> = (
 
                 <button
                     onClick={onFollowClickHandler}
-                    className={user.followed ? styles.follow : `${styles.follow} ${styles.unfollow}`}
+                    disabled={followingInProgress.some(id => id === user.id)}
+                    className={resultClassName}
                 >
                     {user.followed ? 'Follow' : 'Unfollow'}
                 </button>

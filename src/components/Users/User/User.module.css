@@ -37,6 +37,10 @@
     transition: all 0.3s ease-in-out 0s;
 }
 
+.follow:disabled {
+    opacity: 0.7;
+}
+
 .follow:hover {
     background-color: #A4080C;
     color: #fff;

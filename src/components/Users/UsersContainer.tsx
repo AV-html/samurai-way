@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 
 import {
-    changeFollow,
+    changeFollow, changeFollowingProgress,
     changeIsFetching,
     setCurrentPage,
     setTotalCount,
@@ -38,27 +38,18 @@ export class UsersContainer extends React.Component<UsersPropsType> {
             })
     };
 
-    onShowMoreClickHandler() {
-        // !!! then fix:
-    };
-
 
     render() {
         return (
             <>
-                {this.props.isFetching ?
-                    <Preloader/>
-                    : <Users
-                        totalUsersCount={this.props.totalUsersCount}
-                        pageSize={this.props.pageSize}
-                        currentPage={this.props.currentPage}
-                        users={this.props.users}
-
-                        changeFollow={this.props.changeFollow}
-
-                        onPageChanged={this.onPageChanged}
-                        onShowMoreClickHandler={this.onShowMoreClickHandler}
-                    />}
+                {
+                    this.props.isFetching ?
+                        <Preloader/>
+                        : <Users
+                            {...this.props}
+                            onPageChanged={this.onPageChanged}
+                        />
+                }
 
             </>
         )
@@ -74,6 +65,8 @@ type MapStateToProps = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
+
 }
 type MapDispatchToProps = {
     changeFollow: (userID: number, followed: boolean) => void
@@ -81,6 +74,7 @@ type MapDispatchToProps = {
     setCurrentPage: (currentPage: number) => void
     setTotalCount: (totalCount: number) => void
     changeIsFetching: (isFetching: boolean) => void
+    changeFollowingProgress: (userId: number, isFetching: boolean) => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToProps => ({
@@ -88,7 +82,8 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => ({
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
 })
 
 
@@ -97,5 +92,6 @@ export default connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(ma
     setUsers,
     setCurrentPage,
     setTotalCount,
-    changeIsFetching
+    changeIsFetching,
+    changeFollowingProgress
 })(UsersContainer);

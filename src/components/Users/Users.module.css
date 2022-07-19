@@ -51,3 +51,7 @@
     background-color: #A4080C;
     color: #fff;
 }
+
+.wrap-btn button:disabled {
+    opacity: 0.5;
+}

@@ -5,6 +5,7 @@ export const SET_USERS = 'SET_USERS';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 export const CHANGE_IS_FETCHING = 'CHANGE_IS_FETCHING';
+export const CHANGE_IS_FOLLOWING_PROGRESS = 'CHANGE_IS_FOLLOWING_PROGRESS';
 
 
 export type PhotosType = {
@@ -35,6 +36,7 @@ export type UsersActionsType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalCount>
     | ReturnType<typeof changeIsFetching>
+    | ReturnType<typeof changeFollowingProgress>
 
 
 const initialState = {
@@ -42,7 +44,8 @@ const initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: [] as Array<number>
 }
 
 
@@ -74,6 +77,14 @@ export const userReducer = (state: UsersPageType = initialState, action: Actions
                 isFetching: action.isFetching
             }
         }
+        case CHANGE_IS_FOLLOWING_PROGRESS: {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
+        }
     }
 
     return state
@@ -100,4 +111,9 @@ export const setTotalCount = (totalUsersCount: number) => ({
 export const changeIsFetching = (isFetching: boolean) => ({
     type: CHANGE_IS_FETCHING,
     isFetching
+}) as const
+export const changeFollowingProgress = (userId: number, isFetching: boolean) => ({
+    type: CHANGE_IS_FOLLOWING_PROGRESS,
+    userId,
+    isFetching,
 }) as const

@@ -1,22 +1,15 @@
 import React from 'react';
 import {User} from './User/User';
 import styles from './Users.module.css'
-import {UserType} from '../../redux/users-reducer';
 import {usersAPI} from '../../api/api';
+import {UsersPropsType} from './UsersContainer';
 
-type PropsType = {
-    totalUsersCount: number,
-    pageSize: number
-    currentPage: number
-    users: Array<UserType>
 
+type AnotherPropsType = {
     onPageChanged: (page: number) => void
-    onShowMoreClickHandler: () => void
-    changeFollow: (id: number, followed: boolean) => void
 }
 
-
-export function Users(props: PropsType) {
+export function Users(props: UsersPropsType & AnotherPropsType) {
     // pagination
     const pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     const pages: Array<number> = [];
@@ -47,27 +40,31 @@ export function Users(props: PropsType) {
                 {props.users.map((u) => {
 
                     const changeFollow = () => {
+                        props.changeFollowingProgress(u.id, true)
+
                         const isFollowed = !u.followed
                         if (isFollowed) {
                             // Подписаться
                             usersAPI.followUser(u.id)
                                 .then((res) => {
                                     !res.resultCode && props.changeFollow(u.id, isFollowed)
+                                    props.changeFollowingProgress(u.id, false)
                                 })
                         } else {
                             // отписаться
                             usersAPI.deleteFollowUser(u.id)
                                 .then((res) => {
                                     !res.resultCode && props.changeFollow(u.id, isFollowed)
+                                    props.changeFollowingProgress(u.id, false)
                                 })
                         }
-
                     };
 
                     return (
                         <User
                             key={u.id}
                             user={u}
+                            followingInProgress={props.followingInProgress}
 
                             changeFollow={changeFollow}
                         />
@@ -78,7 +75,6 @@ export function Users(props: PropsType) {
             </ul>
             <div className={styles['wrap-btn']}>
                 <button
-                    onClick={props.onShowMoreClickHandler}
                     type={'button'}
                 >
                     Show more
