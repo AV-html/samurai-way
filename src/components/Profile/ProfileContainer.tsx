@@ -5,6 +5,7 @@ import {PhotosType} from '../../redux/users-reducer';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import {setUserProfile} from '../../redux/profile-reducer';
+import {useParams} from 'react-router-dom';
 
 
 type ContactsType = {
@@ -29,9 +30,16 @@ export type UserProfileType = {
 }
 
 
+export type ProfileContainerPropsType = WithRouterComponentType & {
+    userId?: string
+}
+
 export class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount() {
-        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        let userId = this.props.userId
+        !userId && (userId = '2')
+
+        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(res => {
                     this.props.setUserProfile(res.data);
                 }
@@ -39,15 +47,13 @@ export class ProfileContainer extends React.Component<ProfileContainerPropsType>
     }
 
     render() {
-        console.log(this.props);
         return (
-
             <Profile {...this.props} />
         );
     }
 }
 
-export type ProfileContainerPropsType = MapStateToProps & MapDispatchToProps
+export type WithRouterComponentType = MapStateToProps & MapDispatchToProps
 type MapStateToProps = {
     profile: UserProfileType | null
 }
@@ -58,4 +64,21 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => ({
     profile: state.profilePage.userProfile
 })
 
-export default connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(mapStateToProps, {setUserProfile})(ProfileContainer)
+
+const WithRouterComponent = (props: WithRouterComponentType) => {
+    const params = useParams<'userId'>();
+    return (
+        <ProfileContainer
+            {...props}
+            userId={params.userId}
+            // 33 и 34 не работают
+            // 1111 - красивый
+        />
+    );
+}
+
+
+export default connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(mapStateToProps, {setUserProfile})(WithRouterComponent)
+
+
+

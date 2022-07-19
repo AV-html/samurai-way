@@ -8,7 +8,7 @@ export function ProfileInfo({profile}: ProfileContainerPropsType) {
     if (!profile) {
         return <Preloader/>
     }
-    
+
     return (
         <>
             <div className={p['profile-header']}>
@@ -34,20 +34,20 @@ export function ProfileInfo({profile}: ProfileContainerPropsType) {
                     <h3>Contacts:</h3>
                     <ul>
                         {
-                            profile.contacts.vk !== null ?
+                            profile.contacts.vk ?
                                 (
                                     <li className={p['desc-site']}>
-                                        <a href={profile.contacts.vk}
+                                        <a href={`https://${profile.contacts.vk}`}
                                            target={'_blank'}
                                            rel="noopener noreferrer">VK</a>
                                     </li>
                                 ) : null
                         }
                         {
-                            profile.contacts.github !== null ?
+                            profile.contacts.github ?
                                 (
                                     <li className={p['desc-site']}>
-                                        <a href={profile.contacts.github}
+                                        <a href={`https://${profile.contacts.github}`}
                                            target={'_blank'}
                                            rel="noopener noreferrer">GitHub</a>
                                     </li>
