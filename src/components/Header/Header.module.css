@@ -6,6 +6,7 @@
 .row {
     height: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 0 30px;
 }
@@ -21,6 +22,34 @@
     object-fit: cover;
 }
 
+.loginBlock {
+
+
+}
+
+.loginBlock a {
+    display: inline-block;
+
+    padding: 10px 20px;
+    border: 3px solid #fff;
+
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #FE5256;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.loginBlock a:hover {
+    color: #fff;
+    border-color: #A4080C;
+    background-color: #A4080C;
+}
+
+.login {
+    font-size: 20px;
+    font-weight: 600;
+}
 
 
 
