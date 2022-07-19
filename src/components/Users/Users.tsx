@@ -2,7 +2,7 @@ import React from 'react';
 import {User} from './User/User';
 import styles from './Users.module.css'
 import {UserType} from '../../redux/users-reducer';
-import axios from 'axios';
+import {usersAPI} from '../../api/api';
 
 type PropsType = {
     totalUsersCount: number,
@@ -15,12 +15,6 @@ type PropsType = {
     changeFollow: (id: number, followed: boolean) => void
 }
 
-
-type ResFollowType = {
-    resultCode: number
-    messages: Array<string>
-    data: object
-}
 
 export function Users(props: PropsType) {
     // pagination
@@ -56,25 +50,15 @@ export function Users(props: PropsType) {
                         const isFollowed = !u.followed
                         if (isFollowed) {
                             // Подписаться
-                            axios.post<ResFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                withCredentials: true,
-                                headers: {
-                                    'API-KEY': '69c65f38-b674-456f-8e45-79c04188f163'
-                                }
-                            })
+                            usersAPI.followUser(u.id)
                                 .then((res) => {
-                                    !res.data.resultCode && props.changeFollow(u.id, isFollowed)
+                                    !res.resultCode && props.changeFollow(u.id, isFollowed)
                                 })
                         } else {
                             // отписаться
-                            axios.delete<ResFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                withCredentials: true,
-                                headers: {
-                                    'API-KEY': '69c65f38-b674-456f-8e45-79c04188f163'
-                                }
-                            })
+                            usersAPI.deleteFollowUser(u.id)
                                 .then((res) => {
-                                    !res.data.resultCode && props.changeFollow(u.id, isFollowed)
+                                    !res.resultCode && props.changeFollow(u.id, isFollowed)
                                 })
                         }
 
