@@ -26,7 +26,9 @@ export class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.changeIsFetching(true)
         axios
-            .get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+                withCredentials: true,
+            })
             .then((res) => {
                 this.props.setUsers(res.data.items)
                 this.props.setTotalCount(res.data.totalCount)
@@ -38,7 +40,9 @@ export class UsersContainer extends React.Component<UsersPropsType> {
         this.props.setCurrentPage(page)
         this.props.changeIsFetching(true)
         axios
-            .get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+            .get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
+                withCredentials: true,
+            })
             .then((res) => {
                 this.props.setUsers(res.data.items)
                 this.props.changeIsFetching(false)
@@ -98,23 +102,6 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => ({
     isFetching: state.usersPage.isFetching
 })
 
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => ({
-//     changeFollow: (userID: number, followed: boolean) => {
-//         dispatch(changeFollowAC(userID, followed))
-//     },
-//     setUsers: (users: Array<UserType>) => {
-//         dispatch(setUsersAC(users))
-//     },
-//     setCurrentPage: (currentPage: number) => {
-//         dispatch(setCurrentPageAC(currentPage))
-//     },
-//     setTotalCount: (totalUsersCount: number) => {
-//         dispatch(setTotalCountAC(totalUsersCount))
-//     },
-//     changeIsFetching: (isFetching: boolean) => {
-//         dispatch(changeIsFetchingAC(isFetching))
-//     }
-// })
 
 export default connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(mapStateToProps, {
     changeFollow,
